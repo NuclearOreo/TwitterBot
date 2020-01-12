@@ -1,0 +1,30 @@
+{
+  "name": "twitterbot",
+  "version": "1.0.0",
+  "description": "TwitterBot for fun",
+  "main": "dist/bot.js",
+  "scripts": {
+    "start": "node dist/bot.js",
+    "dev": "nodemon src/bot.ts",
+    "build": "tsc -p ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NuclearOreo/TwitterBot.git"
+  },
+  "author": "Ussama Azam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NuclearOreo/TwitterBot/issues"
+  },
+  "homepage": "https://github.com/NuclearOreo/TwitterBot#readme",
+  "dependencies": {
+    "twitter": "^1.7.1"
+  },
+  "devDependencies": {
+    "@types/node": "^13.1.6",
+    "nodemon": "^2.0.2",
+    "ts-node": "^8.6.1",
+    "typescript": "^3.7.4"
+  }
+}
