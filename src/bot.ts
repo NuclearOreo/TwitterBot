@@ -1,6 +1,11 @@
 import Twitter from 'twitter'
+import config from 'config'
+import Cities from './types/cities'
 
 require('dotenv').config()
+
+// Grabbing all the bounding boxes for each city
+const cities: Cities = config.get('cities')
 
 // Setting Up the Client
 const client = new Twitter({
@@ -11,7 +16,9 @@ const client = new Twitter({
 })
 
 // Created a stream Object to stream from twitter
-const stream = client.stream('statuses/filter', { track: 'javascript' })
+const stream = client.stream('statuses/filter', {
+  locations: cities.chicago
+})
 
 // Printing tweets
 stream.on('data', event => {
