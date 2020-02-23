@@ -7,7 +7,6 @@ require('dotenv').config()
 export default class Bot {
   client: Twitter
   cities: Cities
-  stream: NodeJS.EventEmitter
 
   constructor() {
     // Grabbing all the bounding boxes for each city
@@ -20,21 +19,19 @@ export default class Bot {
       access_token_key: process.env.TWITTER_TOKEN_KEY || '',
       access_token_secret: process.env.TWITTER_TOKEN_SECRET || ''
     })
-
-    // Created a stream Object to stream from twitter
-    this.stream = this.client.stream('statuses/filter', {
-      locations: this.cities.chicago
-    })
   }
 
   run(): void {
+    // Created a stream Object to stream from twitter
+    const stream = this.client.stream('statuses/filter', {
+      locations: this.cities.chicago
+    })
     // Printing tweets
-    this.stream.on('data', event => {
+    stream.on('data', event => {
       console.log(event && event.text)
     })
-
     //If anything goes wrongs
-    this.stream.on('error', error => {
+    stream.on('error', error => {
       throw error
     })
   }
