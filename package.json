@@ -20,6 +20,7 @@
   "homepage": "https://github.com/NuclearOreo/TwitterBot#readme",
   "dependencies": {
     "@types/config": "0.0.36",
+    "axios": "^0.19.2",
     "config": "^3.2.5",
     "dotenv": "^8.2.0",
     "twitter": "^1.7.1"
