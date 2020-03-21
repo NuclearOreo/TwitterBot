@@ -1,8 +1,7 @@
-FROM node:12.16
-
-WORKDIR /usr/src/app
-COPY package*.json ./
-
-RUN npm install
-
+FROM node:alpine
+WORKDIR /usr/app
+COPY . .
+RUN npm install -g typescript
+RUN npm i
 RUN tsc
+RUN npm run start
