@@ -12,7 +12,7 @@ Building my self a twitterbot again for fun. The goal is to create a both to spr
 
 Make sure to have `.env` before building the images for the service.
 
-**.env**
+### dotenv
 
 ```
 TWITTER_CONSUMER_KEY=<Need key>
@@ -21,7 +21,7 @@ TWITTER_TOKEN_KEY=<More keys>
 TWITTER_TOKEN_SECRET=<Never enough keys>
 ```
 
-**Commands**
+### Commands
 
 - Build images: `docker build -t twitterbot .`
 - Run services: `docker-compose up`
