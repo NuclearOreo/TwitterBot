@@ -1,0 +1,7 @@
+version: "2"
+services:
+  bot:
+    container_name: bot
+    build: .
+    image: twitterbot
+    command: npm run start

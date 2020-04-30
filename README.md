@@ -4,6 +4,13 @@ Building my self a twitterbot again for fun. The goal is to create a both to spr
 
 ## Node Stuff
 
--  Compile TSC to JS (ES5) : `npm run build`
+- Compile TSC to JS (ES5) : `npm run build`
 - Run Dev enviroment: `npm run dev`
 - Run Bot: `npm run start`
+
+## Docker
+
+Make sure to have `.env` before building the images for the service.
+
+- Build images: `docker build -t twitterbot .`
+- Run services: `docker-compose up`
