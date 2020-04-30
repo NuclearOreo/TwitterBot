@@ -21,5 +21,7 @@ TWITTER_TOKEN_KEY=<More keys>
 TWITTER_TOKEN_SECRET=<Never enough keys>
 ```
 
+**Commands**
+
 - Build images: `docker build -t twitterbot .`
 - Run services: `docker-compose up`
