@@ -1,5 +1,12 @@
 version: "2"
 services:
+  # database:
+  #   container_name: mongodb
+  #   build: quotes/.
+  #   image: quotesdb
+  #   command: mongoimport --collection quotes --file Quotes.csv --type csv --headerline
+  #   ports:
+  #     - "27017-27019:27017-27019"
   bot:
     container_name: bot
     build: .
