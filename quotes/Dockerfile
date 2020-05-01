@@ -1,3 +1,4 @@
 FROM mongo
 WORKDIR /usr/app
-COPY Quotes.csv .
+COPY Quotes.json .
+CMD mongoimport --db bot --collection quotes --file Quotes.json --jsonArray
