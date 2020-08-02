@@ -3,7 +3,6 @@ FROM node:alpine
 # Setting up work directory
 WORKDIR /app
 ADD . .
-COPY . .
 
 # Add arguments
 ARG TWITTER_CONSUMER_KEY
