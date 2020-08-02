@@ -1,12 +1,18 @@
 version: "3.1"
 services:
-  # database:
-  #   container_name: mongodb
-  #   build: quotes/.
-  #   image: quotesdb
-  #   command: mongod
-  #   ports:
-  #     - "27017:27017"
+  mongodb:
+    image: mongo:3.2.6
+    ports:
+      - "27017:27017"
+
+  mongo-seed:
+    image: mongo:3.2.6
+    links:
+      - mongodb
+    volumes:
+      - ./quotes:/quotes
+    command: 'bash -c "mongoimport --host mongodb --db bot --type json --file /quotes/Quotes.json --jsonArray"'
+
   bot:
     container_name: bot
     build:

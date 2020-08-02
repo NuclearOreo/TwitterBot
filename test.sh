@@ -1,1 +1,0 @@
-bash -c "docker exec -it mongodb mongoimport --db bot --collection quotes --file Quotes.json --jsonArray"
