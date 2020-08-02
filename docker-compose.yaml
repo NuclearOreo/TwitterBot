@@ -1,20 +1,9 @@
 version: "3.1"
 services:
-  mongodb:
-    image: mongo:3.2.6
-    ports:
-      - "27017:27017"
-
-  mongo-seed:
-    image: mongo:3.2.6
-    links:
-      - mongodb
-    volumes:
-      - ./quotes:/quotes
-    command: 'bash -c "mongoimport --host mongodb --db bot --type json --file /quotes/Quotes.json --jsonArray"'
-
   bot:
     container_name: bot
+    links:
+      - mongodb
     build:
       context: .
       args:
@@ -23,3 +12,16 @@ services:
         - TWITTER_TOKEN_KEY=${TWITTER_TOKEN_KEY}
         - TWITTER_TOKEN_SECRET=${TWITTER_TOKEN_SECRET}
     command: npm run start
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  mongo-seed:
+    image: mongo
+    links:
+      - mongodb
+    volumes:
+      - ./quotes:/quotes
+    command: 'bash -c "mongoimport --host mongodb --db bot --type json --file /quotes/Quotes.json --jsonArray"'
