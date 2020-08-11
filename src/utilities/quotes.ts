@@ -2,16 +2,23 @@ import { MongoClient } from 'mongodb'
 
 export default class Quotes {
   private client: any
+  private uri = 'mongodb://localhost:27017'
 
-  constructor() {
-    this.setup()
+  constructor(uri?: string) {
+    if (uri) this.uri = uri
   }
 
-  private async setup(uri = 'mongodb://localhost:27017') {
-    const client = await MongoClient.connect(uri, {
-      useNewUrlParser: true,
-    }).catch((err) => console.log(err))
+  async getQuotes(): Promise<void> {
+    if (this.client === undefined) {
+      this.client = await MongoClient.connect(this.uri, {
+        useNewUrlParser: true,
+      }).catch((err: any) => console.log(err))
+    }
+
+    const db = await this.client.db('bot')
   }
 
-  async getQuotes() {}
+  async close(): Promise<void> {
+    await this.client.close()
+  }
 }
