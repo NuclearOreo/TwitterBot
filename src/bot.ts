@@ -1,11 +1,13 @@
 import Twitter from 'twitter'
 import Event from './types/event'
 import randomCity from './utilities/randomCity'
+import Quotes from './utilities/quotes'
 
 require('dotenv').config()
 
 export default class Bot {
   private client: Twitter
+  private quotes: Quotes
 
   constructor() {
     // Setting Up the Client
@@ -15,6 +17,7 @@ export default class Bot {
       access_token_key: process.env.TWITTER_TOKEN_KEY || '',
       access_token_secret: process.env.TWITTER_TOKEN_SECRET || '',
     })
+    this.quotes = new Quotes()
   }
 
   run(): void {
@@ -23,8 +26,9 @@ export default class Bot {
       locations: randomCity(),
     })
     // Printing tweets
-    stream.on('data', (event: Event) => {
+    stream.on('data', async (event: Event) => {
       console.log(event.text)
+      console.log(await this.quotes.getRandomQuote())
     })
     //If anything goes wrongs
     stream.on('error', (error) => {
