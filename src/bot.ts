@@ -2,12 +2,15 @@ import Twitter from 'twitter'
 import Event from './types/event'
 import randomCity from './utilities/randomCity'
 import Quotes from './utilities/quotes'
+import EventEmitter from 'events'
 
 require('dotenv').config()
 
 export default class Bot {
   private client: Twitter
   private quotes: Quotes
+  private numberOfTweets = 10
+  private stream: EventEmitter.EventEmitter
 
   constructor() {
     // Setting Up the Client
@@ -18,21 +21,28 @@ export default class Bot {
       access_token_secret: process.env.TWITTER_TOKEN_SECRET || '',
     })
     this.quotes = new Quotes()
+
+    // Created a stream Object to stream from twitter
+    this.stream = this.client.stream('statuses/filter', {
+      locations: randomCity(),
+    })
+
+    //If anything goes wrongs
+    this.stream.on('error', (error) => {
+      throw error
+    })
   }
 
   run(): void {
-    // Created a stream Object to stream from twitter
-    const stream = this.client.stream('statuses/filter', {
-      locations: randomCity(),
-    })
     // Printing tweets
-    stream.on('data', async (event: Event) => {
+    this.stream.on('data', async (event: Event) => {
       console.log(event.text)
       console.log(await this.quotes.getRandomQuote())
-    })
-    //If anything goes wrongs
-    stream.on('error', (error) => {
-      throw error
+      this.numberOfTweets -= 1
+      if (!this.numberOfTweets) {
+        this.quotes.close()
+        process.exit()
+      }
     })
   }
 }
