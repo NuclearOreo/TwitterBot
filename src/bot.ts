@@ -29,28 +29,38 @@ export default class Bot {
 
     //If anything goes wrongs
     this.stream.on('error', (error) => {
-      throw error
+      throw new Error(error)
     })
   }
 
+  // Able to to tweet with this function
   async tweet(text: string): Promise<void> {
     await this.client
       .post('statuses/update', {
         status: text,
       })
-      .catch((res) => console.log(res))
+      .catch((error) => {
+        console.log(error)
+        if (error[0].code === 186) this.numberOfTweets += 1
+      })
   }
 
+  // Call this to run the both
   run(): void {
-    // Printing tweets
     this.stream.on('data', async (event: Event) => {
-      console.log(event.text)
-      console.log(await this.quotes.getRandomQuote())
-      //await this.tweet(event.text)
-      this.numberOfTweets -= 1
-      if (!this.numberOfTweets) {
-        this.quotes.close()
-        process.exit()
+      try {
+        const quote = await this.quotes.getRandomQuote()
+        const myTweet = `@${event.user.screen_name} \n ${quote.QUOTE} - ${quote.AUTHOR}`
+
+        console.log(myTweet + '\n')
+
+        this.numberOfTweets -= 1
+        if (!this.numberOfTweets) {
+          this.quotes.close()
+          process.exit()
+        }
+      } catch (error) {
+        throw new Error(error)
       }
     })
   }
