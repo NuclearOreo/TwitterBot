@@ -9,7 +9,7 @@ require('dotenv').config()
 export default class Bot {
   private client: Twitter
   private quotes: Quotes
-  private numberOfTweets = 10
+  private numberOfTweets = 100
   private stream: EventEmitter.EventEmitter
 
   constructor() {
@@ -33,11 +33,20 @@ export default class Bot {
     })
   }
 
+  async tweet(text: string): Promise<void> {
+    await this.client
+      .post('statuses/update', {
+        status: text,
+      })
+      .catch((res) => console.log(res))
+  }
+
   run(): void {
     // Printing tweets
     this.stream.on('data', async (event: Event) => {
       console.log(event.text)
       console.log(await this.quotes.getRandomQuote())
+      //await this.tweet(event.text)
       this.numberOfTweets -= 1
       if (!this.numberOfTweets) {
         this.quotes.close()
