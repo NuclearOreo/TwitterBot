@@ -15,6 +15,7 @@ export default class Quotes {
     if (uri) this.uri = uri
   }
 
+  // Grab Random Quote from MongoDB
   async getRandomQuote(): Promise<Quote> {
     try {
       if (this.client === undefined) {
@@ -35,6 +36,7 @@ export default class Quotes {
     }
   }
 
+  // Close MongoDB Connection
   async close(): Promise<void> {
     await this.client.close()
   }

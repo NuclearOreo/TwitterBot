@@ -3,6 +3,7 @@ import Cities from '../types/cities'
 
 const cities: Cities = config.get('cities')
 
+// Getting random coordinate for a city
 const randomCity = (): string => {
   const numberOfCities = 12
   const value = Math.floor(Math.random() * Math.floor(numberOfCities + 1))
