@@ -9,7 +9,7 @@ interface Quote {
 
 export default class Quotes {
   private client: any
-  private uri = 'mongodb://localhost:27017'
+  private uri = 'mongodb://mongodb:27017'
 
   constructor(uri?: string) {
     if (uri) this.uri = uri
