@@ -54,6 +54,8 @@ export default class Bot {
 
         console.log(myTweet + '\n')
 
+        await this.tweet(myTweet)
+
         this.numberOfTweets -= 1
         if (!this.numberOfTweets) {
           this.quotes.close()
