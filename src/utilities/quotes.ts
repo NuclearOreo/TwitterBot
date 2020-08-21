@@ -9,9 +9,15 @@ interface Quote {
 
 export default class Quotes {
   private client: any
-  private uri = 'mongodb://mongodb:27017'
+  private uri: string
 
   constructor(uri?: string) {
+    if (process.env.NODE_ENV === 'production')
+      this.uri = 'mongodb://mongodb:27017'
+    else this.uri = 'mongodb://localhost:27017'
+
+    console.log('*****************************************' + this.uri)
+
     if (uri) this.uri = uri
   }
 
