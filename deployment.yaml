@@ -1,0 +1,17 @@
+- hosts: personal-website
+
+  tasks:
+    - name: Clean up
+      file:
+        path: twitter_bot
+        state: absent
+      become: yes
+      become_user: ussamaazam
+
+    - git:
+        repo: https://github.com/NuclearOreo/TwitterBot.git
+        dest: twitter_bot
+        version: production
+
+    - name: NPM Install
+      command: bash -c "cd twitter_bot && npm i"
