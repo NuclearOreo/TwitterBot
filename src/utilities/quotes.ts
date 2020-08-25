@@ -16,8 +16,6 @@ export default class Quotes {
       this.uri = 'mongodb://mongodb:27017'
     else this.uri = 'mongodb://localhost:27017'
 
-    console.log('*****************************************' + this.uri)
-
     if (uri) this.uri = uri
   }
 
