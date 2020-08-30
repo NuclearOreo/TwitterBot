@@ -16,8 +16,11 @@
     - name: NPM Install
       command: bash -c "cd twitter_bot && npm i"
 
-    - name: Move Enviroment Variables
-      command: bash -c "cp bot.env twitter_bot/.env"
+    - name: Move Enviroment Variables and DockerFiles
+      command: bash -c "cp botInfo/.env botInfo/Dockerfile botInfo/docker-compose.yaml  twitter_bot/"
 
-    - name: Start Containers
-      command: bash -c "cd twitter_bot && docker-compose up -d"
+    - name: Removing any Container
+      command: bash -c "cd twitter_bot && docker-compose down -v"
+
+    - name: Build Images
+      command: bash -c "cd twitter_bot && docker-compose build"
