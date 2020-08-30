@@ -17,7 +17,7 @@
       command: bash -c "cd twitter_bot && npm i"
 
     - name: Move Enviroment Variables and DockerFiles
-      command: bash -c "cp botInfo/.env botInfo/Dockerfile botInfo/docker-compose.yaml  twitter_bot/"
+      command: bash -c "cp botInfo/.env botInfo/Dockerfile botInfo/docker-compose.yaml botInfo/run.sh  twitter_bot/"
 
     - name: Removing any Container
       command: bash -c "cd twitter_bot && docker-compose down -v"
