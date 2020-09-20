@@ -9,7 +9,7 @@ require('dotenv').config()
 export default class Bot {
   private client: Twitter
   private quotes: Quotes
-  private numberOfTweets = 50
+  private numberOfTweets = 30
   private stream: EventEmitter.EventEmitter
 
   constructor() {
