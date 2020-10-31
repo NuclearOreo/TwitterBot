@@ -1,10 +1,10 @@
 import { MongoClient } from 'mongodb'
 
 interface Quote {
-  _id: string
-  QUOTE: string
-  AUTHOR: string
-  GENRE: string
+  _id: string;
+  QUOTE: string;
+  AUTHOR: string;
+  GENRE: string;
 }
 
 export default class Quotes {
@@ -26,7 +26,7 @@ export default class Quotes {
         this.client = await MongoClient.connect(this.uri, {
           useNewUrlParser: true,
           useUnifiedTopology: true,
-        }).catch((err: any) => console.log(err))
+        }).catch((err: unknown) => console.log(err))
       }
 
       const collection = await this.client.db('bot').collection('Quotes')
